@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "58570553-be17-4d89-80cf-3200a4a22a54",
+		"name": "Outshade-Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gaurav@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"username\":\"gaurav\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/api/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gaurav@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/api/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest);\r",
+							"\r",
+							"\r",
+							"const postRequest1 = {\r",
+							"  url: 'http://localhost:2000/api/user/login',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest1, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2000/api/user/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest);\r",
+							"\r",
+							"\r",
+							"const postRequest1 = {\r",
+							"  url: 'http://localhost:2000/api/user/login',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest1, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gaurav@gmail.com\",\r\n    \"password1\":\"12345678\",\r\n    \"password2\":\"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/api/user/update",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest1 = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav3@gmail.com\", password: \"12345678\", username: \"gaurav3\" })\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(postRequest1);\r",
+							"\r",
+							"\r",
+							"const postRequest3 = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav2@gmail.com\", password: \"12345678\", username: \"gaurav2\" })\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(postRequest3);\r",
+							"\r",
+							"\r",
+							"const postRequest2 = {\r",
+							"  url: 'http://localhost:2000/api/user/login',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav2@gmail.com\", password: \"12345678\", username: \"gaurav2\" })\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(postRequest2, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"invitees\":[{\r\n        \"email\": \"gaurav3@gmail.com\",\r\n        \"username\": \"gaurav3\",\r\n        \"password\": \"12345678\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "lolocalhost:2000/api/event/create/event",
+					"host": [
+						"lolocalhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"event",
+						"create",
+						"event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Event Created",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest);\r",
+							"\r",
+							"\r",
+							"const postRequest1 = {\r",
+							"  url: 'http://localhost:2000/api/user/login',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest1, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pagesize\":\"5\",\r\n    \"pagenumber\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/api/event/list/events/created",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"event",
+						"list",
+						"events",
+						"created"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Event Invited",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const postRequest = {\r",
+							"  url: 'http://localhost:2000/api/user/register',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest);\r",
+							"\r",
+							"\r",
+							"const postRequest1 = {\r",
+							"  url: 'http://localhost:2000/api/user/login',\r",
+							"  method: 'POST',\r",
+							"  header: {\r",
+							"    'Content-Type': 'application/json'\r",
+							"  },\r",
+							"  body: {\r",
+							"    mode: 'raw',\r",
+							"    raw: JSON.stringify({ email: \"gaurav@gmail.com\", password: \"12345678\", username: \"gaurav\" })\r",
+							"  }\r",
+							"};\r",
+							"pm.sendRequest(postRequest1, (error,response) => {\r",
+							"    if (!error) {\r",
+							"        response = response.json();\r",
+							"        pm.request.headers.add({\r",
+							"            key: \"x-auth-token\",\r",
+							"            value: response.user\r",
+							"        });\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pagesize\":\"5\",\r\n    \"pagenumber\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2000/api/event/list/events/invited",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"api",
+						"event",
+						"list",
+						"events",
+						"invited"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -20,7 +20,7 @@ router.post('/create/event',auth,async (req,res) => {
     }
     catch (err)
     {
-        return res.json({status:'error', error:err})
+        return res.json({message: 'User already invited in event'});
 
     }
 });
@@ -37,7 +37,7 @@ function compare( a, b ) {
   }
 
 
-router.post("/list/events/invited", auth, async (req,res) => {
+router.get("/list/events/invited", auth, async (req,res) => {
     
     const eventsCreated = await eventSchema.find({ creator: req.user.username})
         .then()
@@ -78,7 +78,7 @@ router.post("/list/events/invited", auth, async (req,res) => {
 
 
 
-router.post("/list/events/created", auth, async (req,res) => {
+router.get("/list/events/created", auth, async (req,res) => {
     const pagesize = req.body.pagesize;
     const pagenumber = req.body.pagenumber;
     

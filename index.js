@@ -36,8 +36,8 @@ mongoose.connect(
 
 
 
-    app.use('/api',authRoutes);
-    app.use('/api',eventRoutes);
+    app.use('/api/user',authRoutes);
+    app.use('/api/event',eventRoutes);
 
 
 

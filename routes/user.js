@@ -9,9 +9,10 @@ const jwt = require('jsonwebtoken');
 router.post('/register',async(req,res) => {
     console.log(req.body);
     const usercheck = await userSchema.findOne({email: req.body.email});
+    console.log(` user check is ${usercheck}`);
     if(usercheck)
     {
-        res.json({message:'user already exist'});
+        return res.json({message:'user already exist'});
     }
 
         await userSchema.create(
@@ -44,6 +45,7 @@ router.post('/login',async (req,res) => {
         password: req.body.password,
 
     })
+    console.log(`login request for ${user}`)
     if(user)
     {
         // creting a token
@@ -75,6 +77,8 @@ router.post('/login',async (req,res) => {
                 } 
             })
         })
+        const loginDoneFor = req.body.email;
+        console.log(`login done for ${loginDoneFor}`);
 
         return res.json({status:'ok', user:token,message:'successfull login', eventsCreated: eventsCreated, eventsInvited: eventsNeedToAttend})
     }
@@ -104,7 +108,7 @@ router.post('/update',auth,async (req,res) => {
         return res.json({staus:'failed', meassage:'enter correct username or password'})
 
 });
-router.post('/logout',auth,async (req,res) => {
+router.get('/logout',auth,async (req,res) => {
 
     
     if(res.cookie)
